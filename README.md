@@ -1,3 +1,9 @@
+<!--
+gallery for md
+spicetify theme + plugins
+flowlauncher config
+-->
+
 <h1 align="center">✨ Windots </h1>
 
 <br>
@@ -6,7 +12,7 @@
 
 ## 🌟 About
 
-Сollection of configurations and tools to transform your Windows into an elegant and productive environment
+Collection of configurations and tools to transform your Windows 11 into an elegant and productive environment
 
 ## 🚀 Setup
 
@@ -22,11 +28,7 @@ After launching the script, you'll get an interactive menu:
 
 1. **Configs Installer** - install configurations on your choice for:
 
-   - [VSCode](https://code.visualstudio.com/) and its forks:
-     - [AIDE](https://github.com/codestoryai/aide)
-     - [Cursor](https://cursor.sh/)
-     - [Windsurf](https://windsurf.io/)
-     - [VSCodium](https://vscodium.com/)
+   - [VSCode](https://code.visualstudio.com/) and most popular forks
    - [Windows Terminal](https://github.com/microsoft/terminal)
    - [PowerShell](https://learn.microsoft.com/en-us/powershell/)
    - [Oh My Posh](https://ohmyposh.dev/)

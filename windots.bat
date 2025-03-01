@@ -118,6 +118,10 @@ goto mainMenu
 start cmd /k powershell -Command "iwr 'https://dub.sh/simplify11' | iex"
 goto mainMenu
 
+@REM Install required fonts
+@REM https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.zip
+@REM https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/JetBrainsMono.zip
+
 :configsMenu
 cls
 echo %Purple% +-------------------------+%Reset%
@@ -140,6 +144,7 @@ if %configChoice% equ 4 goto OhMyPosh
 if %configChoice% equ 5 goto FastFetch
 if %configChoice% equ 6 goto mainMenu
 
+@REM https://raindrop.io/emylfy/vs-code-51485648
 :VSCodeMenu
 cls
 echo %Purple% +-------------------------+%Reset%
