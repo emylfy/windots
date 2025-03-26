@@ -17,7 +17,7 @@ $Red = "$([char]0x1b)[38;5;203m"
 $Green = "$([char]0x1b)[38;5;120m"
 
 function Show-MainMenu {
-    Clear-Host
+    cls
     Write-Host "$Purple +-------------------------------------+$Reset"
     Write-Host "$Purple '$Grey [1] Configs Installer               $Purple'$Reset"
     Write-Host "$Purple +-------------------------------------+$Reset"
@@ -38,17 +38,17 @@ function Show-MainMenu {
         "4" { Install-Steam }
         "5" { Apply-Cursor }
         "6" { Invoke-Simplify11 }
-        default { Show-MainMenu }
+        default { Show-Main }
     }
 }
 
 function Invoke-Rectify11 {
     Start-Process "https://rectify11.net/home"
-    Show-MainMenu
+    Show-Main
 }
 
 function Show-SpotifyToolsMenu {
-    Clear-Host
+    cls
     Write-Host "$Purple +-------------------------------------+$Reset"
     Write-Host "$Purple '$Grey [1] Install SpotX                   $Purple'$Reset"
     Write-Host "$Purple '$Grey [2] Install Spicetify               $Purple'$Reset"
@@ -67,7 +67,7 @@ function Show-SpotifyToolsMenu {
 }
 
 function Install-SpotX {
-    Clear-Host
+    cls
     Write-Host ""
     Write-Host "Installing SpotX..."
     Invoke-Expression (Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/SpotX-Official/spotx-official.github.io/main/run.ps1)
@@ -112,7 +112,20 @@ function Install-Steam {
 }
 
 function Apply-Cursor {
-    Invoke-Item "$env:TEMP\windots\windots-main\cursor\install.inf"
+    Write-Host "Installing macOS cursor theme..."
+    try {
+        $infPath = "$env:TEMP\windots\windots-main\cursor\install.inf"
+
+        Start-Process -FilePath "rundll32.exe" -ArgumentList "advpack.dll,LaunchINFSectionEx $infPath,DefaultInstall,,1,N" -Wait -NoNewWindow
+        Write-Host "$Green macOS cursor theme installed successfully.$Reset"
+        
+        Start-Process "control.exe" -ArgumentList "main.cpl,,1"
+        Write-Host "$Green Opening mouse cursor properties...$Reset"
+    } catch {
+        Write-Host "$Red Failed to install cursor theme. Opening file location instead.$Reset"
+        Start-Process "explorer.exe" -ArgumentList "/select,`"$env:TEMP\windots\windots-main\cursor\install.inf`""
+    }
+    Read-Host "Press Enter to continue"
     Show-MainMenu
 }
 
@@ -211,6 +224,48 @@ function Configure-OtherVSC {
 }
 
 function Configure-WinTerm {
+    Clear-Host
+    Write-Host "$Purple +-----------------------------------------+$Reset"
+    Write-Host "$Purple '$Grey [1] Install Fira Code via Chocolatey    $Purple'$Reset"
+    Write-Host "$Purple '$Grey [2] Manual installation (open website)  $Purple'$Reset"
+    Write-Host "$Purple '$Grey [3] Skip (I already have Fira Code)     $Purple'$Reset"
+    Write-Host "$Purple +-----------------------------------------+$Reset"
+    
+    $choice = Read-Host ">"
+    
+    switch ($choice) {
+        "1" {
+            if (-not (Get-Command choco.exe -ErrorAction SilentlyContinue)) {
+                Write-Host "Chocolatey not found. Installing Chocolatey..."
+                try {
+                    Set-ExecutionPolicy Bypass -Scope Process -Force
+                    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+                    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+                    Write-Host "$Green Chocolatey installed successfully.$Reset"
+                } catch {
+                    Write-Host "$Red Failed to install Chocolatey. Please try manual installation.$Reset"
+                    Start-Process "https://github.com/ryanoasis/nerd-fonts/releases/"
+                }
+            }
+            
+            try {
+                Write-Host "Installing Fira Code font..."
+                Start-Process -FilePath "choco.exe" -ArgumentList "install FiraCode -y --no-progress" -Wait -NoNewWindow
+                Write-Host "$Green Fira Code font installed successfully.$Reset"
+            } catch {
+                Write-Host "$Red Failed to install Fira Code font. Please try manual installation.$Reset"
+                Start-Process "https://github.com/ryanoasis/nerd-fonts/releases/"
+            }
+        }
+        "2" {
+            Write-Host "Opening Nerd Fonts releases page for manual Fira Code installation..."
+            Start-Process "https://github.com/ryanoasis/nerd-fonts/releases/"
+        }
+        "3" {
+            Write-Host "Skipping Fira Code installation..."
+        }
+    }
+    
     try {
         Copy-Item -Path "$env:TEMP\windots\windots-main\config\cli\terminal\settings.json" -Destination "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\" -Force
         Write-Host "$Green Windows Terminal settings copied successfully.$Reset"

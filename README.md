@@ -56,7 +56,7 @@ After launching the script, you'll get an interactive menu:
 
 | Category   | Tools                                                                                                                                                                    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Web**    | 🌐 [Arc Browser](https://thebrowser.company/)<br>🧘 [Zen Browser](https://zen.team/) ([startpage](https://github.com/mue/mue?tab=readme-ov-file#mue))                    |
+| **Web**    | 🌐 [Arc Browser](https://thebrowser.company/)<br>🧘 [Zen Browser](https://zen-browser.app) ([startpage](https://github.com/mue/mue?tab=readme-ov-file#mue))                    |
 | **System** | 🚀 [Flow Launcher](https://www.flowlauncher.com/)<br> 🛠️ [PowerToys](https://learn.microsoft.com/windows/powertoys/)<br> 🗜️ [NanaZip](https://github.com/M2Team/NanaZip) |
 | **Media**  | 🎶 [SpotX](https://github.com/SpotX-Official/SpotX) + [Spicetify](https://spicetify.app/) <br> 🖼️ [WinDynamicDesktop](https://www.windynamicdesktop.com/)                |
 | **Theming** |   🪟 [Rectify11](https://rectify11.net/home) |
