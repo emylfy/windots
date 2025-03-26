@@ -38,10 +38,22 @@ try {
                                 
 "@ -ForegroundColor Cyan
 
+    Start-Sleep -Seconds 1
+    
+    $psScriptPath = "$tempPath\windots-main\windots.ps1"
+    
+    if (!(Test-Path $psScriptPath)) {
+        Write-Host "Error: Could not find windots.ps1 at $psScriptPath" -ForegroundColor Red
+        Write-Host "Contents of $tempPath\windots-main:" -ForegroundColor Yellow
+        Get-ChildItem "$tempPath\windots-main" | Format-Table -AutoSize
+        Start-Sleep -Seconds 5
+        exit
+    }
+    
     if (Get-Command wt -ErrorAction SilentlyContinue) {
-        wt cmd /k "$env:TEMP\windots\windots-main\windots.bat"
+        wt -d "$tempPath\windots-main" powershell -ExecutionPolicy Bypass -File "$psScriptPath"
     } else {
-        cmd.exe /k "$env:TEMP\windots\windots-main\windots.bat"
+        powershell.exe -ExecutionPolicy Bypass -File "$psScriptPath"
     }
 }
 catch {
